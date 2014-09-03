@@ -1,1 +1,1 @@
-﻿Minimalist object-oriented business layer for your app. 
+﻿A minimalist and portable business layer for your applications.
