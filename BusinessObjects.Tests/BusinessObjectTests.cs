@@ -1,14 +1,14 @@
 ﻿using System.Xml.Serialization;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.IO;
 using System.Xml;
 
 namespace BusinessObjects.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class BusinessObjectTests : BaseClass
     {
-        [TestMethod]
+        [Test]
         public void XmlSerializedObjectEqualsOriginalObject()
         {
             var original = GetMock();
@@ -22,7 +22,7 @@ namespace BusinessObjects.Tests
             Assert.IsTrue(serialized.Equals(original));
         }
 
-        [TestMethod]
+        [Test]
         public void XmlSerializedElementsMatchPropertiesOrder()
         {
             var o = GetMock();
@@ -56,7 +56,7 @@ namespace BusinessObjects.Tests
             
         }
 
-        [TestMethod]
+        [Test]
         public void XmlSerializeNullValues()
         {
             var o = GetMock();
@@ -78,7 +78,7 @@ namespace BusinessObjects.Tests
         }
 
 
-        [TestMethod]
+        [Test]
         public void XmlSerializeEmptyStrings()
         {
             var o = GetMock();

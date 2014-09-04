@@ -1,9 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System;
 
 namespace BusinessObjects.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class BaseClass
     {
         protected static ComplexObject GetMock()
@@ -55,7 +55,7 @@ namespace BusinessObjects.Tests
             var v = o.GetBrokenRules()[0];
             Assert.AreEqual(property, v.PropertyName);
             Assert.IsNotNull(v.Description);
-            Assert.IsInstanceOfType(v, expectedValidatorType);
+            Assert.IsInstanceOfType(expectedValidatorType, v);
         }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 
 namespace BusinessObjects.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class CountryTests
     {
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
             const int expectedLength = 250;

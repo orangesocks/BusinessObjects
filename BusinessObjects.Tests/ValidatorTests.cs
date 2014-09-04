@@ -1,16 +1,16 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using NUnit.Framework;
 using System.Collections.Generic;
 using BusinessObjects.Validators;
 
 namespace BusinessObjects.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class ValidatorTests
     {
         const string PropertyName = "SimpleProperty";
         const string Description = "Houston we have a problem.";
 
-        [TestMethod]
+        [Test]
         public void LengthValidator()
         {
             var o = new SimpleObject();
@@ -36,7 +36,7 @@ namespace BusinessObjects.Tests
 
         }
 
-        [TestMethod]
+        [Test]
         public void RequiredValidator()
         {
             var v = new RequiredValidator(PropertyName, Description);
@@ -50,7 +50,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(v.Validate(o));
         }
 
-        [TestMethod]
+        [Test]
         public void DomainValidator()
         {
             var v = new DomainValidator(PropertyName, Description, new []{"ONE", "TWO"});
@@ -69,7 +69,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(v.Validate(o));
         }
 
-        [TestMethod]
+        [Test]
         public void CountryValidator()
         {
             var v = new CountryValidator(PropertyName, Description);
@@ -86,7 +86,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(v.Validate(o));
         }
 
-        [TestMethod]
+        [Test]
         public void DelegateValidator()
         {
             var o = new SimpleObject();
@@ -100,7 +100,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(v.Validate(o));
         }
 
-        [TestMethod]
+        [Test]
         public void RegexValidator()
         {
             var v = new RegexValidator(PropertyName, Description, @"^(0|[1-9][0-9]*)$");
@@ -113,7 +113,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(v.Validate(o));
         }
 
-        [TestMethod]
+        [Test]
         public void AndCompositeValidator()
         {
             var v = new AndCompositeValidator(PropertyName, new List<Validator>{ new RequiredValidator(), new LengthValidator(5)});
@@ -129,7 +129,7 @@ namespace BusinessObjects.Tests
             o.SimpleProperty = "123456";
             Assert.IsFalse(v.Validate(o));
         }
-        [TestMethod]
+        [Test]
         public void XorRequiredValidator(){
         
             var v = new XorRequiredValidator(new []{PropertyName, "AnotherProperty"});

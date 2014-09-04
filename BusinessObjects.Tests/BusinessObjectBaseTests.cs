@@ -1,12 +1,12 @@
 ﻿using BusinessObjects.Validators;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace BusinessObjects.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class BusinessObjectBaseTests : BaseClass
     {
-        [TestMethod]
+        [Test]
         public void IsEmpty() {
             var o = new SimpleObject();
             Assert.IsTrue(o.IsEmpty());
@@ -15,7 +15,7 @@ namespace BusinessObjects.Tests
             Assert.IsFalse(o.IsEmpty());
         }
 
-        [TestMethod]
+        [Test]
         public void NonExistingProperty() {
             var o = GetMock();
             Assert.AreEqual(o.GetBrokenRules("non_existing_property").Count, 0);
@@ -24,7 +24,7 @@ namespace BusinessObjects.Tests
 
         #region V A L I D A T O R S
 
-        [TestMethod]
+        [Test]
         public void RequiredValidator() {
 
             const string propertyName = "RequiredProperty";
@@ -37,7 +37,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void LengthValidator() {
             const string propertyName = "LengthProperty";
             var expectedValidatorType = typeof (LengthValidator);
@@ -50,7 +50,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void CountryValidator() {
 
             const string propertyName = "CountryProperty";
@@ -68,7 +68,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void DelegateValidator() {
 
             const string propertyName = "DelegateProperty";
@@ -82,7 +82,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void RegexValidator() {
 
             const string propertyName = "RegexProperty";
@@ -96,7 +96,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void XorRequiredValidator() {
 
             const string propertyName = null;
@@ -111,7 +111,7 @@ namespace BusinessObjects.Tests
             AssertValidObject(o, propertyName);
         }
 
-        [TestMethod]
+        [Test]
         public void AndCompositeValidator() {
 
             const string propertyName = "AndProperty";
