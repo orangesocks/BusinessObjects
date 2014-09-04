@@ -55,7 +55,7 @@ namespace BusinessObjects.Tests
             var v = o.GetBrokenRules()[0];
             Assert.AreEqual(property, v.PropertyName);
             Assert.IsNotNull(v.Description);
-            Assert.IsInstanceOfType(expectedValidatorType, v);
+            Assert.IsInstanceOf(expectedValidatorType, v);
         }
     }
 }
