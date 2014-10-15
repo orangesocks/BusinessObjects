@@ -4,11 +4,11 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BusinessObjects.PCL")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("BusinessObjects")]
+[assembly: AssemblyDescription("description")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("CIR 2000")]
-[assembly: AssemblyProduct("BusinessObjects.PCL")]
+[assembly: AssemblyProduct("BusinessObjects")]
 [assembly: AssemblyCopyright("Copyright © CIR 2000 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
