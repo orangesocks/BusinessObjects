@@ -93,7 +93,7 @@ namespace BusinessObjects
                 var propertyType = prop.PropertyType;
                 if (prop.PropertyType.IsGenericType && tList.IsAssignableFrom(propertyType.GetGenericTypeDefinition()) ||
                     propertyType.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == tList)) {
-                    WriteXmlList(propertyValue, w);
+                    WriteXmlList(prop.Name, propertyValue, w);
                     continue;
                 }
 
@@ -122,19 +122,31 @@ namespace BusinessObjects
         }
 
         /// <summary>
-        /// Deserializes a List of BusinessObject to one or more XML elements.
+        /// Deserializes a List of BusinessObject or strings to one or more XML elements.
         /// </summary>
+        /// <param name="propertyName">Property name.</param>
         /// <param name="propertyValue">Property value.</param>
         /// <param name="w">Active XML stream writer.</param>
-        private static void WriteXmlList(object propertyValue, XmlWriter w)
+        private static void WriteXmlList(string propertyName, object propertyValue, XmlWriter w)
         {
             var e = propertyValue.GetType().GetMethod("GetEnumerator").Invoke(propertyValue, null) as IEnumerator;
 
             while (e != null && e.MoveNext()) {
-                var bo = e.Current as BusinessObject;
-                // ReSharper disable once PossibleNullReferenceException
-                w.WriteStartElement(bo.GetType().Name);
-                bo.WriteXml(w);
+                if (e.Current == null) continue;
+                var current = e.Current;
+                w.WriteStartElement(propertyName);
+                {
+                    if (current is BusinessObject) {
+                        ((BusinessObject)current).WriteXml(w);
+                    }
+                    else if (current is string)
+                    {
+                        w.WriteString((string) current);
+                    }
+                    else {
+                        w.WriteValue(e.Current);
+                    }
+                }
                 w.WriteEndElement();
             }
         }
