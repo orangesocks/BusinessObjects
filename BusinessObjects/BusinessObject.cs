@@ -190,6 +190,10 @@ namespace BusinessObjects
                     // ReadElementContentAs won't accept a nullable DateTime.
                     propertyType = typeof(DateTime);
                 }
+                if (typeof(Decimal?).IsAssignableFrom(propertyType)) {
+                    // ReadElementContentAs won't accept a nullable Decimal.
+                    propertyType = typeof(Decimal);
+                }
                 // ReSharper disable once AssignNullToNotNullAttribute
                 prop.SetValue(this, r.ReadElementContentAs(propertyType, null), null);
             }
