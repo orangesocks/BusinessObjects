@@ -4,6 +4,8 @@ Changelog
 v0.1.1
 ======
 
+Rilasciata il 7.4.2015
+
 - Fix: ReadXML solleva eccezione su conversione dei Decimal? Chiude FatturaElettronicaPA/FatturaElettronicaPA#3.
 
 
