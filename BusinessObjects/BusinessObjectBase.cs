@@ -1,5 +1,6 @@
 using BusinessObjects.Validators;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -60,23 +61,42 @@ namespace BusinessObjects {
 
                 foreach (var prop in GetAllDataProperties())
                 {
-                    var v = prop.GetValue(this, null);
+                    var challenge = prop.GetValue(this, null);
 
-                    // Only operate on BusinessObject types.
-                    if (!(v is BusinessObjectBase)) continue;
+                    bool printIndex;
 
-                    var childDomainObject = (BusinessObjectBase)v;
-                    if (childDomainObject.IsEmpty()) continue;
+                    // Only operate on T or IList<T>, where T is BusinessObjectBase.
+                    var children = challenge as IList;
+                    if (children != null) {
+                        if (children.Count == 0) continue;
+                        if (!(children[0] is BusinessObjectBase)) continue;
+                        printIndex = true;
+                    }
+                    else {
+                        var child = challenge as BusinessObjectBase;
+                        if (child == null) continue;
+                        children = new List<BusinessObjectBase> {child};
+                        printIndex = false;
+                    }
 
-                    var childErrors = childDomainObject.Error;
-                    if (childErrors == null) continue;
+                    for (var i = 0; i < children.Count; i++)
+                    {
+                        var child = (BusinessObjectBase) children[i];
+                        if (child.IsEmpty()) continue;
 
-                    // TODO Kind of hacky. Perhaps review the Error system (array?). 
-                    // Inject child object name into error messages. 
-                    // IDataErrorInfo wants a string as return value however.
-                    var errors = childErrors.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
-                    foreach (var error in errors) {
-                        result += prop.Name + "." + error + Environment.NewLine;
+                        var childErrors = child.Error;
+                        if (childErrors == null) continue;
+
+                        // TODO Kind of hacky. Perhaps review the Error system (array?). 
+                        // Inject child object name into error messages. 
+                        // IDataErrorInfo wants a string as return value however.
+                        var errors = childErrors.Split(new[] {"\r\n"}, StringSplitOptions.RemoveEmptyEntries);
+                        foreach (var error in errors) {
+                            result += ((printIndex) ? prop.Name + string.Format("[{0}]", i) : prop.Name) 
+                                + "." 
+                                + error 
+                                + Environment.NewLine;
+                        }
                     }
                 }
                 return result;

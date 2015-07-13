@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="BaseClass.cs" />
     <Compile Include="BusinessObjectTests.cs" />
+    <Compile Include="ListOfBusinessObject.cs" />
     <Compile Include="SimpleObject.cs" />
     <Compile Include="ComplexObject.cs" />
     <Compile Include="BusinessObjectBaseTests.cs" />

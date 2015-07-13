@@ -1,17 +1,24 @@
 Changelog
 =========
 
+v0.1.2
+======
+
+- Fix: Also validate properties which are of List<BusinessObjectBase> type.
+  Closes #1.
+
 v0.1.1
 ======
 
-Rilasciata il 7.4.2015
+Released on 7.4.2015
 
-- Fix: ReadXML solleva eccezione su conversione dei Decimal? Chiude FatturaElettronicaPA/FatturaElettronicaPA#3.
+- Fix: ReadXML raises an exception converting Decimal? type. Closes
+  FatturaElettronicaPA/FatturaElettronicaPA#3.
 
 
 v0.1
 ====
 
-Rilasciata il 9.2.2015
+Released on 9.2.2015
 
-- Release iniziale.
+- Initial release.

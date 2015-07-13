@@ -7,6 +7,13 @@ namespace BusinessObjects.Tests
     public class BusinessObjectBaseTests : BaseClass
     {
         [Test]
+        public void ListOfObjectsPrintsIndexOfInvalidItem() {
+            var o = new ListOfBusinessObject();
+            Assert.IsFalse(o.IsValid);
+            Assert.IsTrue(o.Error.Contains("[0]"));
+            Assert.IsTrue(o.Error.Contains("[1]"));
+        }
+        [Test]
         public void IsEmpty() {
             var o = new SimpleObject();
             Assert.IsTrue(o.IsEmpty());
