@@ -4,6 +4,8 @@ Changelog
 v0.1.2
 ======
 
+Released on 14.7.2015
+
 - Fix: Also validate properties which are of List<BusinessObjectBase> type.
   Closes #1.
 
