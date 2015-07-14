@@ -6,7 +6,7 @@
     <title>BusinessObjects</title>
     <authors>Nicola Iarocci, CIR2000</authors>
     <owners>Nicola Iarocci and CIR2000</owners>
-    <licenseUrl>https://github.com/FatturaElettronicaPA/BusinessObjects/blob/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/FatturaElettronicaPA/BusinessObjects/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/FatturaElettronicaPA/BusinessObjects</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XML/JSON (de)serialization and validation.</description>
