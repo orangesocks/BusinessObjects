@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.1.3
+======
+
+Not released yet.
+
+- Fix: Align AssemblyFileVersion to AssemblyVersion. Closes #2.
+
 v0.1.2
 ======
 
