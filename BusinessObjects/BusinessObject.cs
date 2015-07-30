@@ -210,22 +210,28 @@ namespace BusinessObjects
         /// <param name="propertyValue">Property value. Must be a List of BusinessObject instances.</param>
         /// <param name="propertyName">Property name.</param>
         /// <param name="r">Active XML stream reader.</param>
-        private static void ReadXmlList(object propertyValue, string propertyName,  XmlReader r) {
+        private static void ReadXmlList(object propertyValue, string propertyName, XmlReader r) {
 
             // retrieve type of list elements.
             var elementType = propertyValue.GetType().GetGenericArguments().Single();
 
             // quit if it's not a BusinessObject subclass.
             if (elementType.BaseType == null) return;
-            if (!typeof(BusinessObjectBase).IsAssignableFrom(elementType)) return;
-
+            
             // clear the list first.
             propertyValue.GetType().GetMethod("Clear").Invoke(propertyValue, null);
 
             while (r.NodeType == XmlNodeType.Element && r.Name == propertyName) {
-                var bo = Activator.CreateInstance(elementType);
-                ((BusinessObject)bo).ReadXml(r);
-                propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new[] { bo });
+                if (typeof (BusinessObjectBase).IsAssignableFrom(elementType)) {
+                    // list items are expected to be of BusinessObject type.
+                    var bo = Activator.CreateInstance(elementType);
+                    ((BusinessObject)bo).ReadXml(r);
+                    propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new[] { bo });
+                    continue;
+                }
+                if (elementType == typeof (string)) {
+                    propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new object[] { r.ReadElementContentAsString() });
+                }
             }
         }
         #endregion
