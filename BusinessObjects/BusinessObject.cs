@@ -158,8 +158,12 @@ namespace BusinessObjects
         /// <remarks>Reads the outer element. Leaves the reader at the same depth.</remarks>
         // TODO Clear properties before reading from file
         public virtual void ReadXml(XmlReader r) {
-            var props = GetAllDataProperties().ToList();
+            var isEmpty = r.IsEmptyElement;
+            
             r.ReadStartElement();
+            if (isEmpty) return;
+
+            var props = GetAllDataProperties().ToList();
             while (r.NodeType == XmlNodeType.Element) {
 
                 var prop = props.FirstOrDefault(n => n.Name.Equals(r.Name));
@@ -182,9 +186,9 @@ namespace BusinessObjects
                 var tList = typeof (List<>);
                 if (propertyType.IsGenericType && tList.IsAssignableFrom(propertyType.GetGenericTypeDefinition()) ||
                     propertyType.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == tList)) {
-                    ReadXmlList(propertyValue, prop.Name, r);
-                    continue;
-                }
+                        ReadXmlList(propertyValue, prop.Name, r);
+                        continue;
+                    }
 
                 if (typeof(DateTime?).IsAssignableFrom(propertyType)) {
                     // ReadElementContentAs won't accept a nullable DateTime.

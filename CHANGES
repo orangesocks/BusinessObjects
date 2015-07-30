@@ -6,6 +6,7 @@ v0.1.3
 
 Not released yet.
 
+- Fix: Don't hang on empty XML nodes. Closes FatturaElettronicaPA/FatturaElettronicaPA#7.
 - Fix: Align AssemblyFileVersion to AssemblyVersion. Closes #2.
 
 v0.1.2
