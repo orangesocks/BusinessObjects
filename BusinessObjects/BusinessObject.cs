@@ -232,6 +232,9 @@ namespace BusinessObjects
                 if (elementType == typeof (string)) {
                     propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new object[] { r.ReadElementContentAsString() });
                 }
+                if (elementType == typeof (int)) {
+                    propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new[] { r.ReadElementContentAs(elementType, null) });
+                }
             }
         }
         #endregion
