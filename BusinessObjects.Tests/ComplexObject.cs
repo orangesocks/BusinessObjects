@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using BusinessObjects.Validators;
 using System.Xml;
 
@@ -6,17 +7,19 @@ namespace BusinessObjects.Tests
     public class ComplexObject : BusinessObject
     {
         private readonly SimpleObject _simple;
+        private readonly List<string> _listOfStrings;
 
         public ComplexObject()
         {
             _simple = new SimpleObject();
+            _listOfStrings = new List<string>();
             DelegateProperty = "dummy";
             FirstProperty = "first";
             AndProperty = "And";
         }
         public ComplexObject(XmlReader r) { ReadXml(r); }
 
-        protected override System.Collections.Generic.List<Validator> CreateRules()
+        protected override List<Validator> CreateRules()
         {
             var rules = base.CreateRules();
             rules.Add(new LengthValidator("LengthProperty", 1, 5));
@@ -25,10 +28,11 @@ namespace BusinessObjects.Tests
             rules.Add(new DelegateValidator("DelegateProperty", "This is a fail", () => (DelegateProperty == "dummy")));
             rules.Add(new RegexValidator("RegexProperty", "dummy"));
             rules.Add(new XorRequiredValidator(new[] {"FirstProperty", "SecondProperty"}, "This is a fail"));
+            rules.Add(new ListOfStringLengthValidator("ListOfStringsProperty", 1, 5));
             rules.Add(
                 new AndCompositeValidator(
                     "AndProperty",
-                    new System.Collections.Generic.List<Validator> {
+                    new List<Validator> {
                         new LengthValidator(3),
                         new DelegateValidator(null, "fail", () => (AndProperty == "And"))
                     }));
@@ -60,5 +64,8 @@ namespace BusinessObjects.Tests
 
         [DataProperty (order:5)]
         public SimpleObject SimpleObject { get { return _simple; } }
+
+        [DataProperty(order: 6)]
+        public List<string> ListOfStringsProperty { get { return _listOfStrings; }}
     }
 }

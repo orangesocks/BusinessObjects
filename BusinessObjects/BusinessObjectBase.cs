@@ -262,8 +262,18 @@ namespace BusinessObjects {
             foreach (var prop in GetAllDataProperties()) {
                 var v1 = prop.GetValue(this, null);
                 var v2 = prop.GetValue(other, null);
-                if ( v1 != v2 && !v1.Equals(v2)) {
-                    return false;
+
+                if (IsListOfT(prop.PropertyType)) { 
+                    // We only support List<string>.
+                    if (!((List<string>) v1).SequenceEqual((List<string>) v2)) {
+                        return false;
+                    }    
+                } 
+                else {
+                    // Other types, and BusinessObject type.
+                    if ( v1 != v2 && !v1.Equals(v2)) {
+                        return false;
+                    }
                 }
             }
             return true;
@@ -292,6 +302,14 @@ namespace BusinessObjects {
         }
         public override int GetHashCode() {
             return this.GetHashCodeFromFields(GetAllDataProperties());
+        }
+
+        public bool IsListOfT(Type type)
+        {
+            return 
+                type.IsGenericType && typeof(List<>).IsAssignableFrom(type.GetGenericTypeDefinition()) ||
+                type.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == typeof(List<>));
+
         }
         #endregion
     }

@@ -58,6 +58,28 @@ namespace BusinessObjects.Tests
         }
 
         [Test]
+        public void ListOfStringLengthValidator() {
+            const string propertyName = "ListOfStringsProperty";
+            var expectedValidatorType = typeof (ListOfStringLengthValidator);
+
+            var o = GetMock();
+            o.ListOfStringsProperty.Add("too long for ya");
+            AssertInvalidObject(o, propertyName, expectedValidatorType);
+            Assert.IsTrue(o.Error.Contains("#0"));
+
+            o.ListOfStringsProperty.Clear();
+            o.ListOfStringsProperty.Add("hello");
+            o.ListOfStringsProperty.Add("too long for ya");
+            AssertInvalidObject(o, propertyName, expectedValidatorType);
+            Assert.IsTrue(o.Error.Contains("#1"));
+
+            o.ListOfStringsProperty.Clear();
+            o.ListOfStringsProperty.Add("");
+            o.ListOfStringsProperty.Add("hello");
+            AssertValidObject(o, propertyName);
+        }
+
+        [Test]
         public void CountryValidator() {
 
             const string propertyName = "CountryProperty";

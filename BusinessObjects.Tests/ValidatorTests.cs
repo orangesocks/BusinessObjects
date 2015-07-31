@@ -159,6 +159,7 @@ namespace BusinessObjects.Tests
             o.AnotherProperty = "67890";
             Assert.IsFalse(v.Validate(o));
         }
+
         public void AssertValidatorProperties(Validator v)
         {
             Assert.AreEqual(v.PropertyName, PropertyName);

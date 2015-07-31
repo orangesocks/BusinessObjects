@@ -44,7 +44,7 @@ namespace BusinessObjects.Validators {
         /// <summary>
         /// Gets descriptive text about this broken rule.
         /// </summary>
-        public string Description { get; set; }
+        public virtual string Description { get; set; }
 
         /// <summary>
         /// Gets the name of the property or properties the rule belongs to.

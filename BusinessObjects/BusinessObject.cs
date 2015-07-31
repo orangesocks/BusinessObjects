@@ -182,13 +182,11 @@ namespace BusinessObjects
                     continue;
                 }
 
-                // if property type is List<T>, assume it's of BusinessObjects and try to fetch them from XML.
-                var tList = typeof (List<>);
-                if (propertyType.IsGenericType && tList.IsAssignableFrom(propertyType.GetGenericTypeDefinition()) ||
-                    propertyType.GetInterfaces().Any(x => x.IsGenericType && x.GetGenericTypeDefinition() == tList)) {
-                        ReadXmlList(propertyValue, prop.Name, r);
-                        continue;
-                    }
+                // if property type is List<T>, try to fetch the list from XML.
+                if (IsListOfT(propertyType)){
+                    ReadXmlList(propertyValue, prop.Name, r);
+                    continue;
+                }
 
                 if (typeof(DateTime?).IsAssignableFrom(propertyType)) {
                     // ReadElementContentAs won't accept a nullable DateTime.

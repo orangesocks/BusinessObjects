@@ -6,6 +6,7 @@ v0.1.3
 
 Not released yet.
 
+- New: ListOfStringLengthValidator.
 - Fix: Deserialize List<int>. Closes FatturaElettronicaPA/FatturaElettronicaPA#9.
 - Fix: Deserialize List<string>. Closes FatturaElettronicaPA/FatturaElettronicaPA#8.
 - Fix: Don't hang on empty XML nodes. Closes FatturaElettronicaPA/FatturaElettronicaPA#7.
