@@ -6,6 +6,8 @@ v0.1.4
 
 Not released yet
 
+- Fix: ReadXML, cannot convert to Nullable on int? fields. Closes #3.
+
 v0.1.3
 ======
 

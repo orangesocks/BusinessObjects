@@ -188,13 +188,15 @@ namespace BusinessObjects
                     continue;
                 }
 
+                // ReadElementContentAs won't accept a nullable types.
                 if (typeof(DateTime?).IsAssignableFrom(propertyType)) {
-                    // ReadElementContentAs won't accept a nullable DateTime.
                     propertyType = typeof(DateTime);
                 }
-                if (typeof(Decimal?).IsAssignableFrom(propertyType)) {
-                    // ReadElementContentAs won't accept a nullable Decimal.
-                    propertyType = typeof(Decimal);
+                if (typeof(decimal?).IsAssignableFrom(propertyType)) {
+                    propertyType = typeof(decimal);
+                }
+                if (typeof(int?).IsAssignableFrom(propertyType)) {
+                    propertyType = typeof(int);
                 }
                 // ReSharper disable once AssignNullToNotNullAttribute
                 prop.SetValue(this, r.ReadElementContentAs(propertyType, null), null);
@@ -232,6 +234,7 @@ namespace BusinessObjects
                 }
                 if (elementType == typeof (int)) {
                     propertyValue.GetType().GetMethod("Add").Invoke(propertyValue, new[] { r.ReadElementContentAs(elementType, null) });
+
                 }
             }
         }
