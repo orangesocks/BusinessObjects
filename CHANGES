@@ -4,7 +4,7 @@ Changelog
 v0.1.4
 ======
 
-Not released yet
+Released on 5.8.2015
 
 - Fix: ReadXML, cannot convert to Nullable on int? fields. Closes #3.
 
