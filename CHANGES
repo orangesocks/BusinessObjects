@@ -1,6 +1,13 @@
 Changelog
 =========
 
+v0.1.5
+======
+
+Not released yet
+
+- New: DelegateValidator constructor overload with no PropertyName argument.
+
 v0.1.4
 ======
 

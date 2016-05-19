@@ -19,6 +19,16 @@ namespace BusinessObjects.Validators {
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="description">A description message to show if the rule has been broken.</param>
+        /// <param name="ruleDelegate">A delegate that takes no parameters and returns a boolean value, used to validate the rule.</param>
+        public DelegateValidator(string description, SimpleValidatorDelegate ruleDelegate):
+            base(description) {
+            ValidatorDelegate = ruleDelegate;
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         /// <param name="propertyName">The name of the property this rule validates for. This may be blank.</param>
         /// <param name="description">A description message to show if the rule has been broken.</param>
         /// <param name="ruleDelegate">A delegate that takes no parameters and returns a boolean value, used to validate the rule.</param>
