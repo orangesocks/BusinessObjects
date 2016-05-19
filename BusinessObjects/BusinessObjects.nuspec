@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>BusinessObjects</id>
-    <version>0.1.4.0</version>
+    <version>0.1.5.0</version>
     <title>BusinessObjects</title>
     <authors>Nicola Iarocci, CIR2000</authors>
     <owners>Nicola Iarocci and CIR2000</owners>
@@ -11,7 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>XML/JSON (de)serialization and validation.</description>
     <releaseNotes>First public release.</releaseNotes>
-    <copyright>Copyright 2015 Nicola Iarocci and Gestionali Amica</copyright>
+    <copyright>Copyright 2016 Nicola Iarocci and Gestionali Amica</copyright>
     <tags>XML JSON Validation</tags>
   </metadata>
 </package>
