@@ -77,7 +77,7 @@ namespace BusinessObjects
         /// ISO_3166-1 countries.
         /// </summary>
         public static readonly Country[] List = {
-            new Country("", "", null, null),
+            //new Country("", "", null, null),
             new Country("Afghanistan", "AF", "AFG", "004"),
             new Country("Åland Islands", "AX", "ALA", "248"),
             new Country("Albania", "AL", "ALB", "008"),
