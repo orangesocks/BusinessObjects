@@ -1,6 +1,11 @@
 Changelog
 =========
 
+v0.1.6
+======
+
+- New: XmlOptions.ElementName property. Holds the XML element name used when the object is serialized. If null (the default) the class name will be used instead.
+
 v0.1.5
 ======
 

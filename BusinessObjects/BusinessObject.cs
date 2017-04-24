@@ -82,7 +82,7 @@ namespace BusinessObjects
                 var child = propertyValue as BusinessObject;
                 if (child != null) {
                     if (child.IsEmpty() && XmlOptions.SerializeEmptyBusinessObjects == false) continue;
-                    w.WriteStartElement(child.GetType().Name);
+                    w.WriteStartElement((string.IsNullOrEmpty(child.XmlOptions.ElementName) ?  child.GetType().Name : child.XmlOptions.ElementName));
                     child.WriteXml(w);
                     w.WriteEndElement();
                     continue;
